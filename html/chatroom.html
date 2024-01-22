@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Chatroom</title>
+        <meta charset="utf-8"/>
+        <meta name="viewpoint" content="width=device-width, initial-scale=1">
+    </head>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap");
+
+        :root {
+            --black: black;
+            --grey: #f7f7f7;
+            --grey-hover: rgba(0, 0, 0, 0.06);
+            --white: white;
+            --red: red;
+        }
+
+
+        body {
+            margin: 0;
+            height: 100vh;
+            background-color: var(--grey);
+            font-family: "Roboto Mono", sans-serif;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .nav-container {
+            padding: 0;
+            width: 100%;
+            background-color: var(--black);
+            display: flex;
+        }
+
+        .nav-content {
+            color: var(--white);
+            font-size: 32px;
+            margin: 0 30px 0 0;
+            padding: 24px 0 24px 24px;
+            font-weight: bold;
+        }
+        .nav-content2 {
+            color: var(--white);
+            font-size: 24px;
+            padding: 6px 0 0 0;
+            font-weight: bold;
+        }
+
+        .form-container {
+            justify-content: center;
+            margin-top: 80px;
+        }
+
+        .form-content{
+            width: 400px;
+            height: 400px;
+            padding: 0px 32px 24px 32px;
+            border-radius: 12px;
+            border: solid 3px ;
+        }
+
+        .form-content h2{
+            font-size: 32px;
+            margin-top: 44px;
+            margin-bottom: 20px;
+        }
+
+        .form-content input{
+            width: 100%;
+            height: 48px;
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 40px;
+            padding: 0px 0px 0px 20px;
+            box-sizing: border-box;
+        }
+
+        .form-content .submit-button{
+            width: 100%;
+            height: 40px;
+            font-weight: 480;
+            font-size: 16px;
+            border: none;
+            border-radius: 40px;
+            cursor: pointer;
+        }
+
+        .form-container .submit-button:hover{
+            background-color: var(--grey-hover);
+        }
+
+        .form-content .text-content{
+            margin-top: 20px;
+            font-size: 16px;
+            padding: 4px 4px 4px 4px;
+            margin-bottom: 20px;
+        }
+
+        .display-flex {
+            display: flex;
+        }
+
+        .text-center {
+            text-align: center;
+            justify-content: center;
+            margin-top: 70px;
+        }
+
+        .hover-underline:hover {
+            text-decoration: underline;
+        }
+
+        .error {
+            color: var(--red);
+            margin-top: 0px;
+            visibility: hidden;
+        }
+
+        .content-container {
+            justify-content: center;
+            align-items: center;
+            display: flex;
+            flex-flow: column;
+            height: 100%;
+            width: 100%;
+        }
+
+        .post-container {
+            background-color: var(--white);
+            width: 1000px;
+            flex: 1 1 auto;
+            border: none;
+            padding: 0;
+            margin: 0;
+            overflow: auto;
+            
+        }
+
+        .message-input-container {
+            justify-content: center;
+            text-align: center;
+            flex: 0 1 60px;
+            width: 1000px;
+        }
+
+        .message-input-content {
+            background-color: var(--white);
+            width: 100%;
+            height: 100%;
+        }
+
+        .message-input-content input{
+            background-color: var(--grey);
+            width: 90%;
+            height: 48px;
+            margin-bottom: 0px;
+            border: none;
+            border-radius: 40px;
+            padding: 0px 0px 0px 20px;
+            margin: 0 0 4px 0;
+            box-sizing: border-box;
+        }
+
+        .message-container {
+            resize: both;
+            min-width: 100px;
+            max-width: 400px;
+            height: auto;
+            width: auto;
+            flex-flow: column;
+            justify-content: center;
+            margin: 12px 12px 12px 12px;
+        }
+
+        .message-text {
+            resize: both;
+            height: auto;
+            max-width: 380px;
+            background-color: var(--grey);
+            border: none;
+            font-weight: 100;
+            font-size: 16px;
+            border-radius: 40px;
+            padding: 4px 24px 8px 40px;
+            margin: 0px 0px 0px 0px;
+            word-wrap: break-word;
+            display: inline-block;
+        }
+        
+        .signout {
+            margin-left: auto;
+        }
+
+        .signout-button {
+            background-color: var(--black);
+            border: none;
+            color: var(--white);
+        }
+
+        .signout-button:hover {
+            cursor: pointer;
+        }
+
+        .nav-content3 {
+            font-size: 24px;
+            padding-top: 24px;
+            padding-right: 30px;
+            margin-right: 20px;
+            font-weight: bold;
+        }
+    </style>
+    <body>
+        <div class="content-container">
+            <nav class="nav-container">
+                <a href="index.html"><h1 class="nav-content">ChatRoom</h1></a>
+                <a href="video.html"><h3 class="nav-content2">video</h3></a>
+                <form class="signout nav-content3" action="/signout" method="POST">
+                    <input type="submit" value="Signout" class="signout-button nav-content2">
+                </form>
+            </nav>
+            <div class="post-container">
+                
+            </div>
+            <div class="message-input-container">
+                <form class="message-input-content" action="/chatroom" method="POST">
+                    <input type="text" placeholder="message here" name="Message">
+                </form>
+            </form>
+        </div>
+
+        <script>
+            let input = document.getElementsByName("Message")[0];
+            let submit = () => input.submit();
+            
+            input.addEventListener("keydown", function(event) {
+                if (input.value != "" && event.keyCode == 13) {
+                    submit(input);
+                    input.value = "";
+                }
+            });
+
+            const createMessageContainer = function (text) {
+                const messageContainer = document.createElement("div");
+                messageContainer.classList.add("message-container");
+
+                const messageText = document.createElement("div");
+                messageText.classList.add("message-text");
+                messageText.textContent = text;
+
+                messageContainer.appendChild(messageText);
+
+                return messageContainer;
+            }
+
+            let update = () => {
+                window.location.href = "/chatroom.html";
+            }
+            setInterval(update, 10000);
+
+        </script>
+    </body>
+</html>
